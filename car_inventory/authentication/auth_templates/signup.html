@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% with messages = get_flashed_messages(with_categories = True) %}
+    {% if messages %}
+        {% for cat, msg in messages %}
+            {% if cat == 'email-exists' %}
+            <div class="container msg">
+                {{ msg }}
+                <button type="button" class="close" data-dimiss="alert", onclick="this.parentElement.style.display='none'">&times;</button>
+            </div>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+
+<main class="container">
+    <div class="row">
+        <aside class="col-12 col-md-6">
+            <h2>Create Your Account</h2>
+            {% include 'forms.html' %}
+        </aside>
+    </div>
+</main>
+
+{% endblock content %}

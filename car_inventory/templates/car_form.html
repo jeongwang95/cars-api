@@ -1,0 +1,25 @@
+<form method = "POST">
+    {{ form.hidden_tag() }}
+    <div class="form-group">
+        <fieldset id="year-field">
+        {{ form.year.label }}
+        {{ form.year(class = "form-control", placeholder = "Enter the year") }}
+        </fieldset> 
+        <fieldset id="make-field">
+        {{ form.make.label }}
+        {{ form.make(class = "form-control", placeholder = "Enter the make") }}
+        </fieldset>
+        <fieldset id="model-field">
+        {{ form.model.label }}
+        {{ form.model(class = "form-control", placeholder = "Enter the model") }}
+        </fieldset>
+        <fieldset id="color-field">
+        {{ form.color.label }}
+        {{ form.color(class = "form-control", placeholder = "Enter the color") }}
+        </fieldset>
+
+        <!-- Submit Area Button -->
+        {{ form.submit_button(class = "btn btn-primary btn-block") }}
+
+    </div>
+</form>

@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% with messages = get_flashed_messages(with_categories = True) %}
+    {% if messages %}
+        {% for cat, msg in messages %}
+            {% if cat == 'auth-success' %}
+            <div class="container">
+                {{ msg }}
+                <button type="button" class="close" data-dimiss="alert", onclick="this.parentElement.style.display='none'">&times;</button>
+            </div>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+
+<header class="hero-section">
+    <h3 class="header-text">Welcome to Cars API, {{ current_user.first_name.title() }}!</h3>
+    <main class="container car_form">
+        <div class="row">
+            <aside class="col-12 col-md-6">
+                <h2>Enter Your Car Below:</h2>
+                {% include 'car_form.html' %}
+            </aside>
+        </div>
+    </main>
+</header>
+
+<div class="container">
+    <h3>Here are your profile details:</h3>
+    <li class="list-group-item">Email: {{ current_user.email }}</li>
+    <li class="list-group-item">Token: {{ current_user.token }}</li>
+
+    <div class="row">
+        {% for car in cars %}
+        <div class="col-3">
+            <div class="card" style="width: 18rem;">
+                {% if 'SUV' in car.car_type %}
+                <img class="card-img-top" src="../../static/images/car_imgs/suv.png" alt="Car Image">
+                {% elif 'Sedan' in car.car_type %}
+                <img class="card-img-top" src="../../static/images/car_imgs/sedan.png" alt="Car Image">
+                {% elif 'Coupe' in car.car_type %}
+                <img class="card-img-top" src="../../static/images/car_imgs/coupe.png" alt="Car Image">
+                {% elif 'Hatchback' in car.car_type %}
+                <img class="card-img-top" src="../../static/images/car_imgs/hatchback.png" alt="Car Image">
+                {% elif 'Wagon' in car.car_type %}
+                <img class="card-img-top" src="../../static/images/car_imgs/wagon.png" alt="Car Image">
+                {% elif 'Convertible' in car.car_type  %}
+                <img class="card-img-top" src="../../static/images/car_imgs/convertible.png" alt="Car Image">
+                {% elif 'Pickup' in car.car_type %}
+                <img class="card-img-top" src="../../static/images/car_imgs/pickup.png" alt="Car Image">
+                {% else %}
+                <img class="card-img-top" src="../../static/images/car_imgs/van.png" alt="Car Image">
+                {% endif %}
+                
+                <div class="card-body">
+                    <h5 class="card-title">{{ car.make }} {{ car.model }}</h5>
+                    <p class="card-text">{{ car.year }} </p>
+                    <p>Type: {{ car.car_type }}</p>
+                    <p>Color: {{ car.color }}</p>
+                </div>     
+            </div>        
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock content %}
